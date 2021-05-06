@@ -6,6 +6,189 @@ raiz = Tk()
 
 miFrame = Frame(raiz)
 miFrame.pack()
+
+operacion = ""
+reset_pantalla = False
+resultado = 0
+
+
+# -------------pantalla---------------------------------------
+
+numeroPantalla = StringVar()
+
+pantalla = Entry(miFrame, textvariable=numeroPantalla)
+pantalla.grid(row=1, column=1, padx=10, pady=10, columnspan=4)
+pantalla.config(background="black", fg="#03f943", justify="right")
+
+
+# -------------------pulsaciones teclado--------------------------
+
+def numeroPulsado(num):
+    global operacion
+    global reset_pantalla
+
+    if reset_pantalla:
+        numeroPantalla.set(num)
+        reset_pantalla = False
+
+    else:
+        numeroPantalla.set(numeroPantalla.get() + num)
+
+
+# ----------------funcion suma----------------------------------
+
+num1 = 0
+contador_suma = 0
+
+
+def suma(num):
+    global operacion
+    global resultado
+    global num1
+    global contador_suma
+    global reset_pantalla
+
+    if contador_suma == 0:
+        num1 = int(num)
+        resultado = num1
+
+    else:
+        if contador_suma == 1:
+            resultado = num1 + int(num)
+        else:
+            resultado = int(resultado) + int(num)
+
+        numeroPantalla.set(resultado)
+        resultado = numeroPantalla.get()
+
+    contador_suma = contador_suma+1
+    operacion = "suma"
+    reset_pantalla = True
+
+
+# ---------------funcion resta------------------------------
+num1 = 0
+contador_resta = 0
+
+
+def resta(num):
+    global operacion
+    global resultado
+    global num1
+    global contador_resta
+    global reset_pantalla
+
+    if contador_resta == 0:
+        num1 = int(num)
+        resultado = num1
+
+    else:
+        if contador_resta == 1:
+            resultado = num1-int(num)
+
+        else:
+            resultado = int(resultado)-int(num)
+
+        numeroPantalla.set(resultado)
+        resultado = numeroPantalla.get()
+
+    contador_resta = contador_resta+1
+    operacion = "resta"
+    reset_pantalla = True
+
+
+# -------------funcion multiplicacion---------------------
+contador_multi = 0
+
+
+def multiplica(num):
+    global operacion
+    global resultado
+    global num1
+    global contador_multi
+    global reset_pantalla
+
+    if contador_multi == 0:
+        num1 = int(num)
+        resultado = num1
+
+    else:
+        if contador_multi == 1:
+            resultado = num1*int(num)
+
+        else:
+            resultado = int(resultado)*int(num)
+
+        numeroPantalla.set(resultado)
+        resultado = numeroPantalla.get()
+
+    contador_multi = contador_multi+1
+    operacion = "multiplicacion"
+    reset_pantalla = True
+
+# -----------------funcion division---------------------
+
+
+contador_divi = 0
+
+
+def divide(num):
+    global operacion
+    global resultado
+    global num1
+    global contador_divi
+    global reset_pantalla
+
+    if contador_divi == 0:
+        num1 = float(num)
+        resultado = num1
+
+    else:
+        if contador_divi == 1:
+            resultado = num1/float(num)
+
+        else:
+            resultado = float(resultado)/float(num)
+
+        numeroPantalla.set(resultado)
+        resultado = numeroPantalla.get()
+
+    contador_divi = contador_divi+1
+    operacion = "division"
+    reset_pantalla = True
+
+
+# ----------------funcion el_resultado----------------
+
+def el_resultado():
+    global resultado
+    global operacion
+    global contador_suma
+    global contador_resta
+    global contador_multi
+    global contador_divi
+
+    if operacion == "suma":
+        numeroPantalla.set(int(resultado)+int(numeroPantalla.get()))
+        resultado = 0
+        contador_suma = 0
+
+    elif operacion == "resta":
+        numeroPantalla.set(int(resultado)-int(numeroPantalla.get()))
+        resultado = 0
+        contador_resta = 0
+
+    elif operacion == "multiplicacion":
+        numeroPantalla.set(int(resultado)*int(numeroPantalla.get()))
+        resultado = 0
+        contador_multi = 0
+
+    elif operacion == "division":
+        numeroPantalla.set(int(resultado)/int(numeroPantalla.get()))
+        resultado = 0
+        contador_divi = 0
+
+
 # -------------fila 1---------------------------------------------
 
 boton7 = Button(miFrame, text="7", width=3, command=lambda: numeroPulsado("7"))
