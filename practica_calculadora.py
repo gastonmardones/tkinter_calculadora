@@ -53,4 +53,9 @@ botonComa = Button(miFrame, text=",", width=3,
 botonComa.grid(row=5, column=2)
 botonIgual = Button(miFrame, text="=", width=3, command=lambda: el_resultado())
 botonIgual.grid(row=5, column=3)
+botonSum = Button(miFrame, text="+", width=3,
+                  command=lambda: suma(numeroPantalla.get()))
+botonSum.grid(row=5, column=4)
+
+
 raiz.mainloop()
